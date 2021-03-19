@@ -1,7 +1,11 @@
 
 import './AjouterDossier.scss';
 
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { green, purple } from '@material-ui/core/colors';
+
+
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,6 +18,29 @@ import { useState, useEffect, react } from 'react';
 import { TwitterPicker } from 'react-color';
 import { CustomPicker } from 'react-color';
 
+//pour le button rouge
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});
+
+
+
+
+
+
+
+
 
 
 
@@ -23,6 +50,8 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
   const [couleur, setCouleur] = useState('#900');
+//pour les syles de button
+  const classes = useStyles();
 
   return (
     <div className="AjouterDossier">
@@ -31,7 +60,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
         <DialogContent>
           <TextField
             autoFocus
-            margin="dense"
+            margin="normal"
             id="nomDossier"
             label="Nom du dossier"
             type="text"
@@ -39,7 +68,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             onChange={(e) => setNom(e.target.value)}
           />
           <TextField
-            margin="dense"
+            margin="normal"
             id="urlImage"
             label="Adresse de l'image de couverture"
             type="text"
@@ -54,13 +83,24 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button className="Button" color="danger" onClick={()=>setOuvert(false)} >
+          <Button 
+          // className="Button" 
+          variant="contained"
+          color="secondary"
+          onClick={()=>setOuvert(false)} >
             Annuler
           </Button>
      
-          <Button className="Button" background-color="succes" color='success' onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} >
+          <ThemeProvider theme={theme}>
+          <Button
+           className="Button" 
+           variant="contained"
+            color="primary" 
+            className={classes.margin}
+            onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} >
             Ajouter
           </Button>
+          </ThemeProvider>
         </DialogActions>
       </Dialog>
     </div>
