@@ -49,9 +49,17 @@ const theme = createMuiTheme({
 export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [nom, setNom] = useState('');
   const [couverture, setCouverture] = useState('');
-  const [couleur, setCouleur] = useState('#900');
+  const [couleur, setCouleur] = useState('#537169');
 //pour les syles de button
   const classes = useStyles();
+
+
+
+  function viderChamps() {
+    setNom('');
+    setCouverture('');
+    setCouleur('#537169');
+  }
 
   return (
     <div className="AjouterDossier">
@@ -66,6 +74,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setNom(e.target.value)}
+            defaultValue={nom}
           />
           <TextField
             margin="normal"
@@ -74,29 +83,31 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             type="text"
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
+            defaultValue={couverture}
           />
           <TwitterPicker 
             width="100%" 
             triangle="hide"
             colors={["#183BF3","#F33A44","#8D9404","#66E67F","#690A9E","#FF7A00"]}
-            // colors="#181B1E"
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            color={couleur}
           />
         </DialogContent>
         <DialogActions>
-          <Button 
+        <Button  
           variant="contained"
           color="secondary"
-          onClick={()=>setOuvert(false)} >
+          onClick={()=>{setOuvert(false); viderChamps()}} >
             Annuler
           </Button>
      
           <ThemeProvider theme={theme}>
-          <Button
+          <Button 
+         
            variant="contained"
             color="primary" 
             className={classes.margin}
-            onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} >
+            onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }}  >
             Ajouter
           </Button>
           </ThemeProvider>
