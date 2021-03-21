@@ -77,7 +77,8 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           />
           <TwitterPicker 
             width="100%" 
-            triangle="hide" 
+            triangle="hide"
+            colors={["#181B1E","#181B1E","#181B1E","#181B1E","#181B1E","#181B1E"]}
             // colors="#181B1E"
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
           />
