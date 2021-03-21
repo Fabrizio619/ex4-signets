@@ -3,7 +3,7 @@ import './AjouterDossier.scss';
 
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { green, purple } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 
 import TextField from '@material-ui/core/TextField';
@@ -16,7 +16,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { useState, useEffect, react } from 'react';
 
 import { TwitterPicker } from 'react-color';
-import { CustomPicker } from 'react-color';
+
 
 //pour le button rouge
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+//pour le button vert
 const theme = createMuiTheme({
   palette: {
     primary: green,
@@ -78,14 +78,13 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
           <TwitterPicker 
             width="100%" 
             triangle="hide"
-            colors={["#181B1E","#181B1E","#181B1E","#181B1E","#181B1E","#181B1E"]}
+            colors={["#183BF3","#F33A44","#8D9404","#66E67F","#690A9E","#FF7A00"]}
             // colors="#181B1E"
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
           />
         </DialogContent>
         <DialogActions>
           <Button 
-          // className="Button" 
           variant="contained"
           color="secondary"
           onClick={()=>setOuvert(false)} >
@@ -94,7 +93,6 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
      
           <ThemeProvider theme={theme}>
           <Button
-           className="Button" 
            variant="contained"
             color="primary" 
             className={classes.margin}
